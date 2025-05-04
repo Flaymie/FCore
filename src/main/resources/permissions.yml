@@ -1,0 +1,57 @@
+# FCore Permissions Configuration
+# Документация: https://flaymie.dev/docs/fcore/permissions
+
+# Группы прав
+groups:
+  # Администраторы
+  admin:
+    permissions:
+      fcore.admin.*: true
+      fcore.command.*: true
+      fcore.debug: true
+    parents:
+      - vip
+  
+  # VIP-игроки
+  vip:
+    permissions:
+      fcore.vip.*: true
+      fcore.command.fly: true
+      fcore.command.heal: true
+    parents:
+      - default
+  
+  # Обычные игроки
+  default:
+    permissions:
+      fcore.default.*: true
+      fcore.command.help: true
+      fcore.command.spawn: true
+      fcore.command.kick: false
+
+# Пользовательские права
+users:
+  # Пример:
+  # 00000000-0000-0000-0000-000000000000:
+  #   name: ExamplePlayer
+  #   permissions:
+  #     fcore.custom: true
+  #   groups:
+  #     - default 
+
+# Права на команды безопасности
+fcore.admin.security:
+  description: "Доступ к командам безопасности"
+  default: op
+  
+fcore.admin.security.status:
+  description: "Просмотр статуса системы безопасности"
+  default: op
+  
+fcore.admin.security.scan:
+  description: "Проверка плагинов на уязвимости"
+  default: op
+  
+fcore.admin.security.crashreports:
+  description: "Просмотр отчетов о сбоях"
+  default: op 

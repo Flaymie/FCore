@@ -1,0 +1,7 @@
+name: FCore
+version: '${project.version}'
+main: dev.flaymie.fcore.FCore
+api-version: '1.16'
+description: Мощное ядро для плагинов Minecraft
+author: Flaymie
+website: https://flaymie.dev

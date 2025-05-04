@@ -1,0 +1,133 @@
+# FCore Configuration
+# Документация: https://flaymie.dev/docs/fcore
+
+# Общие настройки ядра
+core:
+  # Режим отладки (true/false)
+  debug: false
+  
+  # Локализация (ru_RU, en_US)
+  locale: "ru_RU"
+  
+  # Имя сервера, используется в плейсхолдерах и интеграциях
+  server-name: "MinecraftServer"
+  
+  # Автоматическое сканирование сервисов с аннотацией @Service
+  auto-scan-services: true
+  
+  # Активные модули
+  modules:
+    gui: true
+    commands: true
+    database: true
+    action-system: true
+    permissions: true
+    
+# Настройки логирования
+logging:
+  # Уровень логирования (INFO, WARNING, SEVERE)
+  level: "INFO"
+  
+  # Логировать в файл
+  to-file: true
+  
+  # Максимальный размер файла лога в килобайтах
+  max-file-size: 1024
+  
+# Настройки безопасности
+security:
+  # Проверка лицензий плагинов
+  license-check: true
+  
+  # Интервал проверки в минутах
+  check-interval: 60
+  
+  # Проверять подписи плагинов
+  verify-signatures: false
+  
+  # Изолировать потенциально опасные операции
+  isolate-unsafe: true
+  
+  # Анализировать плагины на уязвимости
+  analyze-plugins: true
+  
+  # Максимальное количество ошибок перед отключением плагина
+  max-errors-before-disable: 10
+  
+  # Перехватывать ошибки плагинов
+  error-handling: true
+  
+  # Защита от эксплойтов
+  exploit-protection:
+    # Блокировать потенциально опасные команды
+    block-unsafe-commands: true
+    
+    # Максимальное количество символов в команде
+    max-command-length: 256
+    
+    # Блокировать чрезмерные запросы к серверу
+    block-excessive-requests: true
+    
+    # Лимит запросов в секунду от одного игрока
+    request-limit-per-second: 20
+  
+# Настройки системы прав
+permissions:
+  # Использовать систему прав FCore
+  enabled: true
+  
+  # Путь к файлу с правами
+  file: "permissions.yml"
+  
+  # Автосохранение прав
+  auto-save: true
+  
+  # Интервал автосохранения в минутах
+  auto-save-interval: 10
+  
+  # Интеграции с другими плагинами прав
+  integrations:
+    # Интеграция с Vault
+    vault: true
+    
+    # Интеграция с LuckPerms (если установлен)
+    luckperms: false
+    
+    # Интеграция с PermissionsEx (если установлен)
+    permissionsex: false
+  
+# Настройки базы данных
+database:
+  # Тип базы данных (MySQL, SQLite)
+  type: "SQLite"
+  
+  # Настройки для MySQL
+  mysql:
+    host: "localhost"
+    port: 3306
+    database: "fcore"
+    username: "root"
+    password: "password"
+    
+  # Настройки для SQLite
+  sqlite:
+    file: "database.db"
+    
+  # Настройки соединения
+  connection:
+    pool-size: 10
+    timeout: 30
+    
+# Настройки производительности
+performance:
+  # Кэширование данных
+  caching: true
+  
+  # Время жизни кэша в секундах
+  cache-ttl: 300
+  
+  # Многопоточность
+  multithreading: true
+  
+  # Максимальное количество потоков
+  max-threads: 4 
