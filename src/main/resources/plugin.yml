@@ -5,3 +5,125 @@ api-version: '1.16'
 description: Мощное ядро для плагинов Minecraft
 author: Flaymie
 website: https://flaymie.dev
+softdepend: [PlaceholderAPI, Vault, WorldGuard]
+
+commands:
+  fcore:
+    description: Основная команда ядра FCore
+    aliases: [fc]
+    usage: /fcore <info|reload|debug|locale|status|hello>
+  fcore.security:
+    description: Управление безопасностью FCore
+    aliases: [fsec, security]
+    usage: /fcore.security <status|scan|crashreports|viewreport>
+  fcoreplugins:
+    description: Управление плагинами FCore
+    aliases: [fcp, fplugins]
+    usage: /fcoreplugins <list|enable|disable|info|reload>
+  debug:
+    description: Управление режимом отладки
+    usage: /debug <info|reload|watch|tps|memory|plugins|gc|report>
+  actiondebug:
+    description: Управление отладкой действий
+    aliases: [adebug]
+    usage: /actiondebug <toggle|log|clear|info|help>
+  permissions:
+    description: Управление правами
+    aliases: [perm, perms]
+    usage: /permissions <groups|user|save|load>
+
+permissions:
+  fcore.command.fcore:
+    description: Доступ к основной команде ядра
+    default: op
+  fcore.command.reload:
+    description: Перезагрузка конфигурации ядра
+    default: op
+  fcore.command.debug:
+    description: Включение/выключение режима отладки
+    default: op
+  fcore.command.locale:
+    description: Установка локализации
+    default: op
+  fcore.command.status:
+    description: Просмотр статуса сервисов ядра
+    default: op
+  fcore.admin.security:
+    description: Доступ к управлению безопасностью
+    default: op
+  fcore.admin.security.status:
+    description: Просмотр статуса системы безопасности
+    default: op
+  fcore.admin.security.scan:
+    description: Сканирование плагинов на уязвимости
+    default: op
+  fcore.admin.security.crashreports:
+    description: Просмотр отчетов о сбоях
+    default: op
+  fcore.admin.plugins:
+    description: Управление плагинами FCore
+    default: op
+  fcore.debug:
+    description: Доступ к командам отладки
+    default: op
+  fcore.debug.reload:
+    description: Перезагрузка режима отладки
+    default: op
+  fcore.debug.watch:
+    description: Мониторинг состояния сервера
+    default: op
+  fcore.debug.gc:
+    description: Запуск сборки мусора
+    default: op
+  fcore.debug.report:
+    description: Создание отчета отладки
+    default: op
+  fcore.action.debug:
+    description: Отладка действий
+    default: op
+  fcore.command.permissions:
+    description: Доступ к командам управления правами
+    default: op
+  fcore.command.permissions.groups:
+    description: Просмотр групп прав
+    default: op
+  fcore.command.permissions.user.add:
+    description: Добавление прав пользователям
+    default: op
+  fcore.command.permissions.user.remove:
+    description: Удаление прав у пользователей
+    default: op
+  fcore.command.permissions.user.check:
+    description: Проверка прав пользователей
+    default: op
+  fcore.command.permissions.user.group.add:
+    description: Добавление пользователей в группы
+    default: op
+  fcore.command.permissions.user.group.remove:
+    description: Удаление пользователей из групп
+    default: op
+  fcore.command.permissions.save:
+    description: Сохранение прав в файл
+    default: op
+  fcore.command.permissions.load:
+    description: Загрузка прав из файла
+    default: op
+  
+  # Группы прав
+  fcore.admin:
+    description: Все права администратора
+    default: op
+    children:
+      fcore.command.fcore: true
+      fcore.command.reload: true
+      fcore.command.debug: true
+      fcore.command.locale: true
+      fcore.command.status: true
+      fcore.admin.security: true
+      fcore.admin.security.status: true
+      fcore.admin.security.scan: true
+      fcore.admin.security.crashreports: true
+      fcore.admin.plugins: true
+      fcore.debug: true
+      fcore.action.debug: true
+      fcore.command.permissions: true

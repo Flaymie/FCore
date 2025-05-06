@@ -282,11 +282,33 @@ public class ServiceScanner implements FCoreService {
                 if (name.startsWith(packagePath) && name.endsWith(".class")) {
                     String className = name.replace('/', '.').substring(0, name.length() - 6);
                     
+                    // Пропускаем классы интеграций, если соответствующие плагины не установлены
+                    if (className.contains("placeholderapi") && 
+                        org.bukkit.Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
+                        logger.info("Пропуск класса PlaceholderAPI интеграции: " + className);
+                        continue;
+                    }
+                    
+                    if (className.contains("worldguard") && 
+                        org.bukkit.Bukkit.getPluginManager().getPlugin("WorldGuard") == null) {
+                        logger.info("Пропуск класса WorldGuard интеграции: " + className);
+                        continue;
+                    }
+                    
+                    if (className.contains("vault") && 
+                        org.bukkit.Bukkit.getPluginManager().getPlugin("Vault") == null) {
+                        logger.info("Пропуск класса Vault интеграции: " + className);
+                        continue;
+                    }
+                    
                     try {
                         Class<?> clazz = Class.forName(className);
                         classes.add(clazz);
                     } catch (ClassNotFoundException e) {
                         logger.warning("Не удалось загрузить класс " + className + ": " + e.getMessage());
+                    } catch (NoClassDefFoundError e) {
+                        // Пропускаем классы, которые зависят от отсутствующих библиотек
+                        logger.info("Пропуск класса с отсутствующими зависимостями: " + className + ": " + e.getMessage());
                     }
                 }
             }
@@ -318,11 +340,33 @@ public class ServiceScanner implements FCoreService {
                 // Загружаем .class файл
                 String className = packageName + "." + file.getName().substring(0, file.getName().length() - 6);
                 
+                // Пропускаем классы интеграций, если соответствующие плагины не установлены
+                if (className.contains("placeholderapi") && 
+                    org.bukkit.Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
+                    logger.info("Пропуск класса PlaceholderAPI интеграции: " + className);
+                    continue;
+                }
+                
+                if (className.contains("worldguard") && 
+                    org.bukkit.Bukkit.getPluginManager().getPlugin("WorldGuard") == null) {
+                    logger.info("Пропуск класса WorldGuard интеграции: " + className);
+                    continue;
+                }
+                
+                if (className.contains("vault") && 
+                    org.bukkit.Bukkit.getPluginManager().getPlugin("Vault") == null) {
+                    logger.info("Пропуск класса Vault интеграции: " + className);
+                    continue;
+                }
+                
                 try {
                     Class<?> clazz = Class.forName(className);
                     classes.add(clazz);
                 } catch (ClassNotFoundException e) {
                     logger.warning("Не удалось загрузить класс " + className + ": " + e.getMessage());
+                } catch (NoClassDefFoundError e) {
+                    // Пропускаем классы, которые зависят от отсутствующих библиотек
+                    logger.info("Пропуск класса с отсутствующими зависимостями: " + className + ": " + e.getMessage());
                 }
             }
         }

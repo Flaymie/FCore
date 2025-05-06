@@ -30,6 +30,10 @@ public class PlaceholderAPIManager implements FCoreService {
             return;
         }
         
+        try {
+            // Проверяем, что класс PlaceholderExpansion доступен
+            Class.forName("me.clip.placeholderapi.expansion.PlaceholderExpansion");
+            
         // Создаем и регистрируем расширение
         expansion = new FCorePlaceholderExpansion(plugin);
         
@@ -38,6 +42,12 @@ public class PlaceholderAPIManager implements FCoreService {
             enabled = true;
         } else {
             logger.warning("Не удалось зарегистрировать расширение PlaceholderAPI");
+            }
+        } catch (ClassNotFoundException e) {
+            logger.warning("Класс PlaceholderExpansion не найден, интеграция отключена");
+        } catch (Exception e) {
+            logger.severe("Ошибка при инициализации интеграции с PlaceholderAPI: " + e.getMessage());
+            e.printStackTrace();
         }
     }
     
