@@ -167,6 +167,44 @@ public class SecurityManager implements FCoreService {
     }
     
     /**
+     * Проверяет отдельный плагин Bukkit
+     * @param bukkitPlugin плагин для проверки
+     * @return результат проверки
+     */
+    public PluginVerificationResult verifyPlugin(Plugin bukkitPlugin) {
+        String pluginName = bukkitPlugin.getName();
+
+        // Проверяем кеш сначала
+        if (verificationCache.containsKey(pluginName)) {
+            PluginVerificationResult cachedResult = verificationCache.get(pluginName);
+            if (System.currentTimeMillis() - cachedResult.getTimestamp() < checkIntervalMillis) {
+                return cachedResult;
+            }
+        }
+
+        PluginVerificationResult result = new PluginVerificationResult(pluginName);
+        result.setTimestamp(System.currentTimeMillis());
+
+        // Проверяем, что плагин зависит от FCore
+        if (!bukkitPlugin.getDescription().getDepend().contains("FCore")) {
+            result.setStatus(PluginVerificationStatus.BLOCKED);
+            result.addIssue("Плагин не зависит от FCore в plugin.yml");
+            verificationCache.put(pluginName, result);
+            return result;
+        }
+
+        // В будущем здесь может быть более сложная логика проверки лицензии,
+        // хеша, подписи и т.д.
+        // Пока что, если зависимость есть, считаем, что все в порядке.
+        result.setStatus(PluginVerificationStatus.VERIFIED);
+        
+        // Сохраняем результат в кеш
+        verificationCache.put(pluginName, result);
+        
+        return result;
+    }
+
+    /**
      * Проверяет плагин на уязвимости
      * @param bukkitPlugin плагин для проверки
      */
