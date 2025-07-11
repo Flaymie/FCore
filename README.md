@@ -58,17 +58,17 @@ FCore - это мощное ядро для разработки плагино�
 
 ```xml
 <repositories>
-    <repository>
-        <id>flaymie-repo</id>
-        <url>https://repo.flaymie.dev/maven</url>
-    </repository>
+   <repository>
+      <id>fcore-repo</id>
+      <url>https://raw.githubusercontent.com/Flaymie/FCore/main/repo/</url>
+   </repository>
 </repositories>
 
 <dependencies>
     <dependency>
         <groupId>dev.flaymie</groupId>
         <artifactId>fcore</artifactId>
-        <version>1.0</version>
+        <version>1.1</version>
         <scope>provided</scope>
     </dependency>
 </dependencies>
@@ -78,11 +78,11 @@ FCore - это мощное ядро для разработки плагино�
 
 ```groovy
 repositories {
-    maven { url 'https://repo.flaymie.dev/maven' }
+    maven { url 'https://raw.githubusercontent.com/Flaymie/FCore/main/repo/' }
 }
 
 dependencies {
-    compileOnly 'dev.flaymie:fcore:1.0'
+    compileOnly 'dev.flaymie:fcore:1.1'
 }
 ```
 

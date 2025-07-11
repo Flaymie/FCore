@@ -504,5 +504,11 @@ public class CommandManager implements FCoreService {
     private void registerCoreCommands() {
         registerCommand(FCoreCommand.class);
         registerCommand(dev.flaymie.fcore.commands.ActionDebugCommand.class);
+        registerCommand(dev.flaymie.fcore.commands.DebugCommand.class);
+        registerCommand(dev.flaymie.fcore.commands.PermissionCommand.class);
+        registerCommand(dev.flaymie.fcore.commands.PluginCommand.class);
+        registerCommand(dev.flaymie.fcore.commands.SecurityCommand.class);
+        
+        logger.info("Все базовые команды FCore зарегистрированы");
     }
 } 
